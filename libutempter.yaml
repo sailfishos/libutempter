@@ -1,0 +1,29 @@
+Name: libutempter
+Summary: A privileged helper for utmp/wtmp updates
+Version: 1.1.5
+Release: 2
+Group: System/Libraries
+License: LGPLv2
+URL: ftp://ftp.altlinux.org/pub/people/ldv/utempter
+Sources:
+    - ftp://ftp.altlinux.org/pub/people/ldv/utempter/%{name}-%{version}.tar.bz2
+Description: |
+    This library provides interface for terminal emulators such as
+    screen and xterm to record user sessions to utmp and wtmp files.
+
+RequiresPre:
+    - shadow-utils
+Provides:
+    - utempter = %{utempter_compat_ver}
+Obsoletes:
+    - utempter
+Configure: none
+Builder: none
+SubPackages:
+    - Name: devel
+      Summary: Development environment for utempter
+      Group: Development/Libraries
+      Description: |
+          This package contains development files required to build
+          utempter-based software.
+
