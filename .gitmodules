@@ -1,0 +1,3 @@
+[submodule "libutempter"]
+	path = libutempter
+	url = git://git.altlinux.org/people/ldv/packages/libutempter.git
