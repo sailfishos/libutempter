@@ -5,8 +5,8 @@ Summary:    A privileged helper for utmp/wtmp updates
 Version:    1.1.5
 Release:    2
 Group:      System/Libraries
-License:    LGPLv2.1+
-URL:        https://git.merproject.org/mer-core/libutempter
+License:    LGPLv2+
+URL:        https://git.sailfishos.org/mer-core/libutempter
 Source0:    %{name}-%{version}.tar.bz2
 Requires(pre): shadow-utils
 Requires(post): /sbin/ldconfig
@@ -55,7 +55,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.a
 
 %files
 %defattr(-,root,root,-)
-%doc %{name}/COPYING %{name}/README
+%license %{name}/COPYING 
 %{_libdir}/libutempter.so.0
 %{_libdir}/libutempter.so.1.1.5
 %dir %attr(755,root,utempter) %{_libexecdir}/utempter
@@ -63,6 +63,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.a
 
 %files devel
 %defattr(-,root,root,-)
+%doc %{name}/README
 %{_includedir}/utempter.h
 %{_libdir}/libutempter.so
 
