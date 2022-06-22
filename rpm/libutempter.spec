@@ -6,7 +6,7 @@ Version:    1.1.5
 Release:    2
 Group:      System/Libraries
 License:    LGPLv2+
-URL:        https://git.sailfishos.org/mer-core/libutempter
+URL:        https://github.com/sailfishos/libutempter
 Source0:    %{name}-%{version}.tar.bz2
 Requires(pre): shadow-utils
 Requires(post): /sbin/ldconfig
