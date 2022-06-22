@@ -4,7 +4,6 @@ Name:       libutempter
 Summary:    A privileged helper for utmp/wtmp updates
 Version:    1.1.5
 Release:    2
-Group:      System/Libraries
 License:    LGPLv2+
 URL:        https://github.com/sailfishos/libutempter
 Source0:    %{name}-%{version}.tar.bz2
@@ -21,7 +20,6 @@ screen and xterm to record user sessions to utmp and wtmp files.
 
 %package devel
 Summary:    Development environment for utempter
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description devel
