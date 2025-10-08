@@ -2,7 +2,7 @@
 
 Name:       libutempter
 Summary:    A privileged helper for utmp/wtmp updates
-Version:    1.1.5
+Version:    1.2.3
 Release:    2
 License:    LGPLv2+
 URL:        https://github.com/sailfishos/libutempter
@@ -32,35 +32,38 @@ utempter-based software.
 
 %build
 cd %{name}
+
+cat > %{name}.sysusers.conf <<_EOF
+g utmp 22
+g utempter 35
+_EOF
+
 make CFLAGS="$RPM_OPT_FLAGS" libdir="%{_libdir}" libexecdir="%{_libexecdir}"
 
 %install
 cd %{name}
-rm -rf %{buildroot}
-make install DESTDIR="$RPM_BUILD_ROOT" libdir="%{_libdir}" libexecdir="%{_libexecdir}"
+%make_install libdir="%{_libdir}" libexecdir="%{_libexecdir}"
 # NOTE: Static lib intentionally disabled.
-rm -f $RPM_BUILD_ROOT%{_libdir}/*.a
+rm -f %{buildroot}%{_libdir}/*.a
 
-%pre
-{
-%{_sbindir}/groupadd -g 22 -r -f utmp || :
-%{_sbindir}/groupadd -g 35 -r -f utempter || :
-}
+# Remove documentation
+rm -Rf %{buildroot}%{_mandir}
+
+install -D -m0644 %{name}.sysusers.conf %{buildroot}%{_sysusersdir}/%{name}.conf
 
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root,-)
 %license %{name}/COPYING 
 %{_libdir}/libutempter.so.0
-%{_libdir}/libutempter.so.1.1.5
+%{_libdir}/libutempter.so.1.*
 %dir %attr(755,root,utempter) %{_libexecdir}/utempter
 %attr(2711,root,utmp) %{_libexecdir}/utempter/utempter
+%{_sysusersdir}/%{name}.conf
 
 %files devel
-%defattr(-,root,root,-)
 %doc %{name}/README
 %{_includedir}/utempter.h
 %{_libdir}/libutempter.so
